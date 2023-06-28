@@ -9,10 +9,17 @@ const Board: React.FC = () => {
     ["", "", ""]
   ];
 
-  const [board, setBoard] = useState(initialBoardState);
+  const [board, setBoard] = useState([
+    ["", "X", ""],
+    ["", "", ""],
+    ["", "O", ""]
+  ]);
   const [isPlayerOneNext, setIsPlayerOneNext] = useState(true);
 
-  const resetBoard = () => setBoard(initialBoardState);
+  const resetBoard = () => {
+    console.log('I was clicked')
+    setBoard(initialBoardState)
+  };
 
   return (
     <div className={styles["game-board"]}>
