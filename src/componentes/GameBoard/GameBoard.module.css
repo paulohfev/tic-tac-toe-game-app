@@ -4,6 +4,7 @@
   flex-direction: column;
   height: 100vh;
   justify-content: center;
+  position: relative;
   width: 100vw;
 }
 
@@ -36,4 +37,10 @@
 
 .board-row {
   display: flex;
+}
+
+.game-end-message {
+  bottom: 250px;
+  color: red;
+  position: absolute;
 }

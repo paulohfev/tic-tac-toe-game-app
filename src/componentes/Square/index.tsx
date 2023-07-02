@@ -5,13 +5,21 @@ import styles from './Square.module.css';
 
 type Props = {
   board: Board;
+  isWinnerIndetermined: boolean;
   isPlayerOneNext: boolean;
   placement: number[];
   setBoard: (T: Board) => void;
   setIsPlayerOneNext: (T: boolean) => void;
 }
 
-const Square: React.FC<Props> = ({ board, placement, setBoard, setIsPlayerOneNext, isPlayerOneNext }) => {
+const Square: React.FC<Props> = ({
+  board,
+  isWinnerIndetermined,
+  isPlayerOneNext,
+  placement,
+  setBoard,
+  setIsPlayerOneNext,
+}) => {
   const [rowIndex, columnIndex] = placement;
   const [value, setValue] = useState(board[rowIndex][columnIndex]);
   const newValue = isPlayerOneNext ? PlayerSymbol.X : PlayerSymbol.O;
@@ -21,12 +29,16 @@ const Square: React.FC<Props> = ({ board, placement, setBoard, setIsPlayerOneNex
   }, [board[rowIndex][columnIndex]]);
 
   const handleClick = () => {
-    setIsPlayerOneNext(!isPlayerOneNext);
-    setValue(newValue);
-
-    const updatedBoard = [...board];
-    updatedBoard[rowIndex][columnIndex] = newValue;
-    setBoard(updatedBoard);
+    if (isWinnerIndetermined) {
+      setIsPlayerOneNext(!isPlayerOneNext);
+      setValue(newValue);
+  
+      const updatedBoard = [...board];
+      updatedBoard[rowIndex][columnIndex] = newValue;
+      setBoard(updatedBoard);
+    } else {
+      return;
+    }
   }
 
   return (

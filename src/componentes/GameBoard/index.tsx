@@ -14,8 +14,9 @@ const GameBoard: React.FC = () => {
   const [board, setBoard] = useState<Board>(boardInitialState);
   const [isPlayerOneNext, setIsPlayerOneNext] = useState(true);
   const [winner, setWinner] = useState<string | Player>('None');
+  const isWinnerIndetermined = winner === 'None';
 
-  const checkWinningCondition = (board: Board, symbol: string): boolean => {
+  const checkWinningCondition = (board: Board, symbol: PlayerSymbol): boolean => {
     // Check rows
     for (let i = 0; i < 3; i++) {
       if (board[i][0] === symbol && board[i][1] === symbol && board[i][2] === symbol) {
@@ -63,11 +64,14 @@ const GameBoard: React.FC = () => {
         Next player: <span>{isPlayerOneNext ? Player.One : Player.Two}</span>
       </div>
       <div className={styles.instructions}>Winner: <span>{winner}</span></div>
+
       <button onClick={() => resetBoard()} className={styles.button}>Reset</button>
+
       <div className={styles.board}>
         <div className={styles["board-row"]}>
           <Square
             board={board}
+            isWinnerIndetermined={isWinnerIndetermined}
             placement={[0, 0]}
             setBoard={setBoard}
             setIsPlayerOneNext={setIsPlayerOneNext}
@@ -75,6 +79,7 @@ const GameBoard: React.FC = () => {
           />
           <Square
             board={board}
+            isWinnerIndetermined={isWinnerIndetermined}
             placement={[0, 1]}
             setBoard={setBoard}
             setIsPlayerOneNext={setIsPlayerOneNext}
@@ -82,6 +87,7 @@ const GameBoard: React.FC = () => {
           />
           <Square
             board={board}
+            isWinnerIndetermined={isWinnerIndetermined}
             placement={[0, 2]}
             setBoard={setBoard}
             setIsPlayerOneNext={setIsPlayerOneNext}
@@ -91,6 +97,7 @@ const GameBoard: React.FC = () => {
         <div className={styles["board-row"]}>
           <Square
             board={board}
+            isWinnerIndetermined={isWinnerIndetermined}
             placement={[1, 0]}
             setBoard={setBoard}
             setIsPlayerOneNext={setIsPlayerOneNext}
@@ -98,6 +105,7 @@ const GameBoard: React.FC = () => {
           />
           <Square
             board={board}
+            isWinnerIndetermined={isWinnerIndetermined}
             placement={[1, 1]}
             setBoard={setBoard}
             setIsPlayerOneNext={setIsPlayerOneNext}
@@ -105,6 +113,7 @@ const GameBoard: React.FC = () => {
           />
           <Square
             board={board}
+            isWinnerIndetermined={isWinnerIndetermined}
             placement={[1, 2]}
             setBoard={setBoard}
             setIsPlayerOneNext={setIsPlayerOneNext}
@@ -114,6 +123,7 @@ const GameBoard: React.FC = () => {
         <div className={styles["board-row"]}>
           <Square
             board={board}
+            isWinnerIndetermined={isWinnerIndetermined}
             placement={[2, 0]}
             setBoard={setBoard}
             setIsPlayerOneNext={setIsPlayerOneNext}
@@ -121,6 +131,7 @@ const GameBoard: React.FC = () => {
           />
           <Square
             board={board}
+            isWinnerIndetermined={isWinnerIndetermined}
             placement={[2, 1]}
             setBoard={setBoard}
             setIsPlayerOneNext={setIsPlayerOneNext}
@@ -128,6 +139,7 @@ const GameBoard: React.FC = () => {
           />
           <Square
             board={board}
+            isWinnerIndetermined={isWinnerIndetermined}
             placement={[2, 2]}
             setBoard={setBoard}
             setIsPlayerOneNext={setIsPlayerOneNext}
@@ -135,6 +147,8 @@ const GameBoard: React.FC = () => {
           />
         </div>
       </div>
+
+      {!isWinnerIndetermined && <span className={styles['game-end-message']}>Reset the board to play again!</span>}
     </div>
   );
 };
