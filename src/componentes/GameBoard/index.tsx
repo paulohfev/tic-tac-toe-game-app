@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Square from '../Square';
 import { Player } from '../../enums/Player';
 import { PlayerSymbol } from '../../enums/PlayerSymbol';
-import { Board } from '../types/board';
+import { Board } from '../../types/board';
 import styles from './GameBoard.module.css';
 
 const GameBoard: React.FC = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PlayerSymbol } from '../../enums/PlayerSymbol';
-import { Board } from '../types/board';
+import { Board } from '../../types/board';
 import styles from './Square.module.css';
 
 type Props = {
