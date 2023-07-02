@@ -148,7 +148,9 @@ const GameBoard: React.FC = () => {
         </div>
       </div>
 
-      {!isWinnerIndetermined && <span className={styles['game-end-message']}>Reset the board to play again!</span>}
+      {!isWinnerIndetermined && (
+        <span className={styles['game-end-message']}>Reset the board to play again!</span>
+      )}
     </div>
   );
 };

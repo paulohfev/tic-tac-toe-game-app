@@ -9,30 +9,30 @@
 }
 
 .board {
-  background-color: '#eee';
-  width: 208px;
   align-items: center;
-  justify-content: center;
+  background-color: '#eee';
+  border: 3px #eee solid;
   display: flex;
   flex-direction: column;
-  border: 3px #eee solid;
+  justify-content: center;
+  width: 208px;
 }
 
 .instructions {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-weight: bold;
   font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 .button {
-  margin-top: 15px;
-  margin-bottom: 16px;
-  width: '80px';
-  height: '40px';
   background-color: '#8acaca';
   color: white;
   font-size: 16px;
+  height: 40px;
+  margin-bottom: 16px;
+  margin-top: 15px;
+  width: 80px;
 }
 
 .board-row {
