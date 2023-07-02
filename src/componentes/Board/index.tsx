@@ -1,32 +1,68 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Square from '../Square';
+import { Player } from '../../enums/Player';
+import { PlayerSymbol } from '../../enums/PlayerSymbol';
+import { Board } from '../types/board';
 import styles from './Board.module.css';
 
 const Board: React.FC = () => {
-  const [board, setBoard] = useState([
+  const boardInitialState = [
     ["", "", ""],
     ["", "", ""],
     ["", "", ""]
-  ]);
+  ];
+  const [board, setBoard] = useState<Board>(boardInitialState);
   const [isPlayerOneNext, setIsPlayerOneNext] = useState(true);
+  const [winner, setWinner] = useState<string | Player>('None');
 
-  const resetBoard = () => {
-    setBoard([
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""]
-    ]);
-    setIsPlayerOneNext(true);
+  const checkWinningCondition = (board: Board, symbol: string): boolean => {
+    // Check rows
+    for (let i = 0; i < 3; i++) {
+      if (board[i][0] === symbol && board[i][1] === symbol && board[i][2] === symbol) {
+        return true;
+      }
+    }
+  
+    // Check columns
+    for (let i = 0; i < 3; i++) {
+      if (board[0][i] === symbol && board[1][i] === symbol && board[2][i] === symbol) {
+        return true;
+      }
+    }
+  
+    // Check diagonals
+    if (board[0][0] === symbol && board[1][1] === symbol && board[2][2] === symbol) {
+      return true;
+    }
+  
+    if (board[0][2] === symbol && board[1][1] === symbol && board[2][0] === symbol) {
+      return true;
+    }
+  
+    return false;
   };
 
-  console.log(board)
+  useEffect(() => {
+    if (checkWinningCondition(board, PlayerSymbol.X)) {
+      setWinner(Player.One)
+    } else if (checkWinningCondition(board, PlayerSymbol.O)) {
+      setWinner(Player.Two)
+    } else {
+      setWinner('None')
+    }
+  }, [board, checkWinningCondition])
+
+  const resetBoard = () => {
+    setBoard(boardInitialState);
+    setIsPlayerOneNext(true);
+  };
 
   return (
     <div className={styles["game-board"]}>
       <div className={styles.instructions}>
-        Next player: <span>{isPlayerOneNext ? 'Player 1' : 'Player 2'}</span>
+        Next player: <span>{isPlayerOneNext ? Player.One : Player.Two}</span>
       </div>
-      <div className={styles.instructions}>Winner: <span>None</span></div>
+      <div className={styles.instructions}>Winner: <span>{winner}</span></div>
       <button onClick={() => resetBoard()} className={styles.button}>Reset</button>
       <div className={styles.board}>
         <div className={styles["board-row"]}>
