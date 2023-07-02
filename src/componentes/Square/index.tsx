@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import styles from './Square.module.css';
 
 type Props = {
   board: string[][];
@@ -8,36 +9,26 @@ type Props = {
   setIsPlayerOneNext: (T: boolean) => void;
 }
 
-const squareStyle = {
-  'width':'60px',
-  'height':'60px',
-  'backgroundColor': '#ddd',
-  'margin': '4px',
-  'display': 'flex',
-  'justifyContent': 'center',
-  'alignItems': 'center',
-  'fontSize': '20px',
-  'color': 'white'
-}
-
 const Square: React.FC<Props> = ({ board, placement, setBoard, setIsPlayerOneNext, isPlayerOneNext }) => {
-  const [value, setValue] = useState('');
   const [rowIndex, columnIndex] = placement;
+  const [value, setValue] = useState(board[rowIndex][columnIndex]);
   const newValue = isPlayerOneNext ? 'X' : 'O';
+
+  useEffect(() => {
+    setValue(board[rowIndex][columnIndex]);
+  }, [board[rowIndex][columnIndex]]);
 
   const handleClick = () => {
     setIsPlayerOneNext(!isPlayerOneNext);
     setValue(newValue);
-    board[rowIndex][columnIndex] = newValue;
-    setBoard((prevState) => [...prevState])
+
+    const updatedBoard = [...board];
+    updatedBoard[rowIndex][columnIndex] = newValue;
+    setBoard(updatedBoard);
   }
 
   return (
-    <div
-      className="square"
-      onClick={() => handleClick()}
-      style={squareStyle}
-    >
+    <div className={styles.wrapper} onClick={() => handleClick()}>
       {value}
     </div>
   );

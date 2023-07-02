@@ -3,28 +3,30 @@ import Square from '../Square';
 import styles from './Board.module.css';
 
 const Board: React.FC = () => {
-  const initialBoardState = [
+  const [board, setBoard] = useState([
     ["", "", ""],
     ["", "", ""],
     ["", "", ""]
-  ];
-
-  const [board, setBoard] = useState([
-    ["", "X", ""],
-    ["", "", ""],
-    ["", "O", ""]
   ]);
   const [isPlayerOneNext, setIsPlayerOneNext] = useState(true);
 
   const resetBoard = () => {
-    console.log('I was clicked')
-    setBoard(initialBoardState)
+    setBoard([
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""]
+    ]);
+    setIsPlayerOneNext(true);
   };
+
+  console.log(board)
 
   return (
     <div className={styles["game-board"]}>
-      <div id="statusArea" className={styles.instructions}>Next player: <span>X</span></div>
-      <div id="winnerArea" className={styles.instructions}>Winner: <span>None</span></div>
+      <div className={styles.instructions}>
+        Next player: <span>{isPlayerOneNext ? 'Player 1' : 'Player 2'}</span>
+      </div>
+      <div className={styles.instructions}>Winner: <span>None</span></div>
       <button onClick={() => resetBoard()} className={styles.button}>Reset</button>
       <div className={styles.board}>
         <div className={styles["board-row"]}>
