@@ -1,6 +1,6 @@
 import React from 'react';
-import Board from './componentes/Board/index.tsx';
+import GameBoard from './componentes/GameBoard/index.tsx';
 
-const App: React.FC = () => <Board />;
+const App: React.FC = () => <GameBoard />;
 
 export default App

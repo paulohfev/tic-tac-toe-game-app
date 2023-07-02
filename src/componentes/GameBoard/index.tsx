@@ -3,9 +3,9 @@ import Square from '../Square';
 import { Player } from '../../enums/Player';
 import { PlayerSymbol } from '../../enums/PlayerSymbol';
 import { Board } from '../types/board';
-import styles from './Board.module.css';
+import styles from './GameBoard.module.css';
 
-const Board: React.FC = () => {
+const GameBoard: React.FC = () => {
   const boardInitialState = [
     ["", "", ""],
     ["", "", ""],
@@ -139,4 +139,4 @@ const Board: React.FC = () => {
   );
 };
 
-export default Board;
+export default GameBoard;
